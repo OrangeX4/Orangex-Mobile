@@ -1,7 +1,7 @@
 # Finux
 A file manager for mobile linux like termux.
 
-## run
+## Run
 ```bash
 npm run serve
 ```

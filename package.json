@@ -1,0 +1,15 @@
+{
+  "name": "finux",
+  "version": "1.0.0",
+  "description": "A file manager for mobile linux like Termux",
+  "main": "index.js",
+  "scripts": {
+    "test": "node fs2json.js",
+    "serve":"node index.js"
+  },
+  "author": "OrangeX4",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

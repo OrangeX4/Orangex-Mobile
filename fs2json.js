@@ -1,0 +1,41 @@
+const fs = require("fs")
+const path = require("path")
+
+exports.readDir = function readDir(dirname) {
+
+    retJson = {
+        isExist: false,
+        current: path.resolve(dirname),
+        dirs: [],
+        files: []
+    }
+
+    if(!fs.existsSync(dirname)) return retJson
+
+    retJson.isExist = true
+    files = fs.readdirSync(dirname)
+
+    files.forEach(file => {
+        stats = fs.statSync(path.join(dirname, file))
+        if (stats.isDirectory()) {
+            subfiles = fs.readdirSync(path.join(dirname, file))
+            retJson.dirs.push({
+                name: file,
+                items: subfiles.length
+            })
+        } else {
+            if(stats.size < 1024) sizeText = stats.size + ' Bytes'
+            else if(stats.size < 1024*1024) sizeText = parseInt(stats.size / 1024) + ' KiB'
+            else if(stats.size < 1024*1024*1024) sizeText = parseInt(stats.size / (1024*1024)) + ' MiB'
+            else sizeText = parseInt(stats.size / (1024*1024*1024)) + ' GiB'
+            retJson.files.push({
+                name: file,
+                size: stats.size,
+                showSize: sizeText,
+                lastTime: stats.mtime.toLocaleDateString()
+            })
+        }
+    })
+
+    return retJson
+}

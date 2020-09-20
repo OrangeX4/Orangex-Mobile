@@ -1,19 +1,31 @@
-const express = require('express')
+const express_back = require('express')
+const express_front = require('express')
 const fs = require('./fs2json')
-const app = express()
-const port = 1984
+const back = express_back()
+const front = express_front()
+const port_back = 1984
+const port_front = 8080
 
-app.use(express.static('public'))
+back.all('*', function (req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    res.header('Access-Control-Allow-Methods', '*');
+    res.header('Content-Type', 'application/json;charset=utf-8');
+    next();
+  });
 
-app.get('/hello', (req, res) => {
+front.use(express_front.static('public'))
+
+back.get('/hello', (req, res) => {
     res.send('Hello World!')
 })
 
-app.get("/dir", (req,res) => {
+back.get("/dir", (req,res) => {
     if(req.query.dir == undefined) res.send(fs.readDir('/home'))
     else res.send(fs.readDir(req.query.dir))
 });
 
-app.listen(port, 
+back.listen(port_back)
+front.listen(port_front, 
     () => console.log(
-        `Finux listening on port ${port}!`))
+        `Finux listening on 127.0.0.1:${port_front}!`))

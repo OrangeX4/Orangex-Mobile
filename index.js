@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const express_back = require('express')
 const express_front = require('express')
 const fs = require('./fs2json')
@@ -28,4 +30,4 @@ back.get("/dir", (req,res) => {
 back.listen(port_back)
 front.listen(port_front, 
     () => console.log(
-        `Finux listening on 127.0.0.1:${port_front}!`))
+        `Finux listening on http://127.0.0.1:${port_front}/`))

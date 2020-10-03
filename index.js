@@ -23,8 +23,12 @@ back.get('/hello', (req, res) => {
 })
 
 back.get("/dir", (req,res) => {
-    if(req.query.dir == undefined) res.send(fs.readDir('/home'))
-    else res.send(fs.readDir(req.query.dir))
+    try{
+        if(req.query.dir == undefined) res.send(fs.readDir('.'))
+        else res.send(fs.readDir(req.query.dir))
+      }catch(err){
+        console.log(err.message)
+      }
 });
 
 back.listen(port_back)

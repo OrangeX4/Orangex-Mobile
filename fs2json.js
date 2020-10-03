@@ -3,9 +3,13 @@ const path = require("path")
 
 exports.readDir = function readDir(dirname) {
 
+    dirname = path.resolve(dirname)
+
+    // console.log(dirname)
+
     retJson = {
         isExist: false,
-        current: path.resolve(dirname),
+        current: dirname,
         dirs: [],
         files: []
     }

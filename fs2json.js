@@ -70,3 +70,14 @@ exports.delete = (paras) => {
     })
     return JSON.stringify({ success: true })
 }
+
+exports.move = (paras) => {
+    props = JSON.parse(paras)
+    props.dirs.forEach((dir) => {
+        fs.renameSync(path.join(props.oldDir, dir), path.join(props.newDir, dir))
+    })
+    props.files.forEach((file) => {
+        fs.renameSync(path.join(props.oldDir, file), path.join(props.newDir, file))
+    })
+    return JSON.stringify({ success: true })
+}

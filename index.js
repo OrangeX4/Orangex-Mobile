@@ -107,6 +107,19 @@ back.post('/move', (req, res) => {
         }
     });
 })
+back.post('/copy', (req, res) => {
+    let body = ''
+    req.on('data', (chunk) => {
+        body += chunk
+    });
+    req.on('end', () => {
+        try {
+            res.send(fs.copy(body))
+        } catch (err) {
+            res.send(JSON.stringify({ success: false }))
+        }
+    });
+})
 
 // Listening
 back.listen(port_back)

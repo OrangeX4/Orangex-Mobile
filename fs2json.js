@@ -54,3 +54,7 @@ exports.newDir = (name) => {
     return JSON.stringify({ name: name, success: true })
 }
 
+exports.rename = (oldName, newName) => {
+    fs.renameSync(oldName, newName)
+    return JSON.stringify({ oldName: oldName, newName: newName, success: true })
+}

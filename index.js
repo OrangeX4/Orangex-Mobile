@@ -65,6 +65,22 @@ back.get('/newdir', (req, res) => {
         }))
     }
 })
+back.get('/rename', (req, res) => {
+    try {
+        if (req.query.oldname !== undefined && req.query.newname !== undefined) res.send(fs.rename(req.query.oldname, req.query.newname))
+        else res.send(JSON.stringify({
+            oldName: req.query.oldname,
+            newName: req.query.newname,
+            success: false
+        }))
+    } catch (err) {
+        res.send(JSON.stringify({
+            oldName: req.query.oldname,
+            newName: req.query.newname,
+            success: false
+        }))
+    }
+})
 
 
 // Listening

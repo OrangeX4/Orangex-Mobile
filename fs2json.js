@@ -1,7 +1,7 @@
 const fs = require("fs")
 const path = require("path")
 
-exports.readDir = function readDir(dirname) {
+exports.readDir = (dirname) => {
 
     dirname = path.resolve(dirname)
 
@@ -14,7 +14,7 @@ exports.readDir = function readDir(dirname) {
         files: []
     }
 
-    if(!fs.existsSync(dirname)) return retJson
+    if (!fs.existsSync(dirname)) return retJson
 
     retJson.isExist = true
     files = fs.readdirSync(dirname)
@@ -28,10 +28,10 @@ exports.readDir = function readDir(dirname) {
                 items: subfiles.length
             })
         } else {
-            if(stats.size < 1024) sizeText = stats.size + ' Bytes'
-            else if(stats.size < 1024*1024) sizeText = parseInt(stats.size / 1024) + ' KiB'
-            else if(stats.size < 1024*1024*1024) sizeText = parseInt(stats.size / (1024*1024)) + ' MiB'
-            else sizeText = parseInt(stats.size / (1024*1024*1024)) + ' GiB'
+            if (stats.size < 1024) sizeText = stats.size + ' Bytes'
+            else if (stats.size < 1024 * 1024) sizeText = parseInt(stats.size / 1024) + ' KiB'
+            else if (stats.size < 1024 * 1024 * 1024) sizeText = parseInt(stats.size / (1024 * 1024)) + ' MiB'
+            else sizeText = parseInt(stats.size / (1024 * 1024 * 1024)) + ' GiB'
             retJson.files.push({
                 name: file,
                 size: stats.size,
@@ -43,3 +43,14 @@ exports.readDir = function readDir(dirname) {
 
     return retJson
 }
+
+exports.newFile = (name) => {
+    fs.closeSync(fs.openSync(name, 'a'))
+    return JSON.stringify({ name: name, success: true })
+}
+
+exports.newDir = (name) => {
+    fs.mkdirSync(name)
+    return JSON.stringify({ name: name, success: true })
+}
+

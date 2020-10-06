@@ -9,29 +9,66 @@ const port_back = 1984
 const port_front = 8080
 
 back.all('*', function (req, res, next) {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', 'Content-Type');
-    res.header('Access-Control-Allow-Methods', '*');
-    res.header('Content-Type', 'application/json;charset=utf-8');
-    next();
-  });
+    res.header('Access-Control-Allow-Origin', '*')
+    res.header('Access-Control-Allow-Headers', 'Content-Type')
+    res.header('Access-Control-Allow-Methods', '*')
+    res.header('Content-Type', 'application/json;charset=utf-8')
+    next()
+});
 
 front.use(express_front.static('public'))
 
+
+// Main
 back.get('/hello', (req, res) => {
     res.send('Hello World!')
 })
+back.get('/dir', (req, res) => {
+    try {
+        if (req.query.name === undefined) res.send(fs.readDir('.'))
+        else res.send(fs.readDir(req.query.name))
+    } catch (err) {
+        // console.log(err.message)
+        res.send(JSON.stringify({
+            isExist: false,
+            current: req.query.name,
+            dirs: [],
+            files: []
+        }))
+    }
+})
+back.get('/newfile', (req, res) => {
+    try {
+        if (req.query.name !== undefined) res.send(fs.newFile(req.query.name))
+        else res.send(JSON.stringify({
+            name: req.query.name,
+            success: false
+        }))
+    } catch (err) {
+        res.send(JSON.stringify({
+            name: res.query.name,
+            success: false
+        }))
+    }
+})
+back.get('/newdir', (req, res) => {
+    try {
+        if (req.query.name !== undefined) res.send(fs.newDir(req.query.name))
+        else res.send(JSON.stringify({
+            name: req.query.name,
+            success: false
+        }))
+    } catch (err) {
+        res.send(JSON.stringify({
+            name: res.query.name,
+            success: false
+        }))
+    }
+})
 
-back.get("/dir", (req,res) => {
-    try{
-        if(req.query.dir == undefined) res.send(fs.readDir('.'))
-        else res.send(fs.readDir(req.query.dir))
-      }catch(err){
-        console.log(err.message)
-      }
-});
 
+// Listening
 back.listen(port_back)
-front.listen(port_front, 
+front.listen(port_front,
     () => console.log(
         `Finux listening on http://127.0.0.1:${port_front}/`))

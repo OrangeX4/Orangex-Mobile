@@ -81,6 +81,19 @@ back.get('/rename', (req, res) => {
         }))
     }
 })
+back.post('/delete', (req, res) => {
+    let body = ''
+    req.on('data', (chunk) => {
+        body += chunk
+    });
+    req.on('end', () => {
+        try {
+            res.send(fs.delete(body))
+        } catch (err) {
+            res.send(JSON.stringify({ success: false }))
+        }
+    });
+})
 
 
 // Listening

@@ -1,4 +1,5 @@
 const fs = require("fs")
+const rimraf = require("rimraf")
 const path = require("path")
 
 exports.readDir = (dirname) => {
@@ -57,4 +58,15 @@ exports.newDir = (name) => {
 exports.rename = (oldName, newName) => {
     fs.renameSync(oldName, newName)
     return JSON.stringify({ oldName: oldName, newName: newName, success: true })
+}
+
+exports.delete = (paras) => {
+    props = JSON.parse(paras)
+    props.dirs.forEach((dir) => {
+        rimraf.sync(path.join(props.current, dir))
+    })
+    props.files.forEach((file) => {
+        fs.unlinkSync(path.join(props.current, file))
+    })
+    return JSON.stringify({ success: true })
 }

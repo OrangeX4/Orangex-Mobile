@@ -1,8 +1,7 @@
-#!/usr/bin/env node
-
 const express_back = require('express')
 const express_front = require('express')
 const fs = require('./fs2json')
+const path = require('path')
 const back = express_back()
 const front = express_front()
 const port_back = 1984
@@ -16,7 +15,7 @@ back.all('*', function (req, res, next) {
     next()
 });
 
-front.use(express_front.static('public'))
+front.use(express_front.static(path.join(__dirname, 'public')))
 
 
 // Main
@@ -126,3 +125,4 @@ back.listen(port_back)
 front.listen(port_front,
     () => console.log(
         `Finux listening on http://127.0.0.1:${port_front}/`))
+

@@ -1,6 +1,6 @@
 {
   "name": "finux",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "A file manager for mobile linux like Termux",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
     "serve": "node index.js"
   },
   "bin": {
-    "finux": "./index.js"
+    "finux": "./bin.js"
   },
   "author": "OrangeX4",
   "license": "MIT",

@@ -120,9 +120,25 @@ back.post('/copy', (req, res) => {
     });
 })
 
+function logIPAdressAndPort() {
+    let interfaces = require('os').networkInterfaces();
+    for (var devName in interfaces) {
+        var iface = interfaces[devName]
+        for (var i = 0; i < iface.length; i++) {
+            let alias = iface[i]
+            if (alias.family === 'IPv4' && alias.address !== '127.0.0.1' && !alias.internal) {
+                console.log(`       http://${alias.address}:${port_front}/`)
+            }
+        }
+    }
+}
+
 // Listening
 back.listen(port_back)
 front.listen(port_front,
-    () => console.log(
-        `Finux listening on http://127.0.0.1:${port_front}/`))
-
+    () => {
+        console.log(`Finux listening on`)
+        console.log(`       http://127.0.0.1:${port_front}/`)
+        logIPAdressAndPort()
+        console.log(`Press Ctrl + C to exit.`)
+    })

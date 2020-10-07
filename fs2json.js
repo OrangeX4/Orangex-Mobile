@@ -74,10 +74,20 @@ exports.delete = (paras) => {
 exports.move = (paras) => {
     props = JSON.parse(paras)
     props.dirs.forEach((dir) => {
-        fs.renameSync(path.join(props.oldDir, dir), path.join(props.newDir, dir))
+        fs.rename(path.join(props.oldDir, dir), path.join(props.newDir, dir), (err) => {
+            if(err) {
+                copyFolder(path.join(props.oldDir, dir), path.join(props.newDir, dir))
+                rimraf.sync(path.join(props.oldDir, dir))
+            }
+        })
     })
     props.files.forEach((file) => {
-        fs.renameSync(path.join(props.oldDir, file), path.join(props.newDir, file))
+        fs.rename(path.join(props.oldDir, file), path.join(props.newDir, file), (err) => {
+            if(err) {
+                fs.copyFileSync(path.join(props.oldDir, file), path.join(props.newDir, file))
+                fs.unlinkSync(path.join(props.oldDir, file))
+            }
+        })
     })
     return JSON.stringify({ success: true })
 }

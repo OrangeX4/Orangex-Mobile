@@ -1,14 +1,14 @@
 {
-  "name": "finux",
-  "version": "1.2.5",
-  "description": "A file manager for mobile linux like Termux",
+  "name": "orangex",
+  "version": "1.3.1",
+  "description": "A useful tool chain for mobile coding with termux.",
   "main": "index.js",
   "scripts": {
     "test": "node fs2json.js",
     "serve": "node index.js"
   },
   "bin": {
-    "finux": "./bin.js"
+    "orangex": "./bin.js"
   },
   "author": "OrangeX4",
   "license": "MIT",

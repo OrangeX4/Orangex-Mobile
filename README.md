@@ -33,6 +33,10 @@ finux
 # Screenshot (屏幕截图)
 ![Pic1](https://s1.ax1x.com/2020/10/08/0wUuDA.jpg)
 
+---
+
 ![Pic2](https://s1.ax1x.com/2020/10/08/0wUejH.jpg)
+
+---
 
 ![Pic3](https://s1.ax1x.com/2020/10/08/0wUnud.jpg)

@@ -119,6 +119,32 @@ back.post('/copy', (req, res) => {
         }
     });
 })
+back.post('/read', (req, res) => {
+    let body = ''
+    req.on('data', (chunk) => {
+        body += chunk
+    });
+    req.on('end', () => {
+        try {
+            res.send(fs.read(body))
+        } catch (err) {
+            res.send(JSON.stringify({ success: false }))
+        }
+    });
+})
+back.post('/write', (req, res) => {
+    let body = ''
+    req.on('data', (chunk) => {
+        body += chunk
+    });
+    req.on('end', () => {
+        try {
+            res.send(fs.write(body))
+        } catch (err) {
+            res.send(JSON.stringify({ success: false }))
+        }
+    });
+})
 
 function logIPAdressAndPort() {
     let interfaces = require('os').networkInterfaces();

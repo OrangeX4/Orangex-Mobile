@@ -1,6 +1,7 @@
 const fs = require("fs")
 const rimraf = require("rimraf")
 const path = require("path")
+const { json } = require("express")
 
 exports.readDir = (dirname) => {
 
@@ -125,4 +126,15 @@ exports.copy = (paras) => {
         fs.copyFileSync(path.join(props.oldDir, file), path.join(props.newDir, file))
     })
     return JSON.stringify({ success: true })
+}
+
+
+exports.read = (paras) => {
+    props = JSON.parse(paras)
+    return JSON.stringify({success: true, data: (fs.readFileSync(props.path, props.option)).toString()})
+}
+
+exports.write = (paras) => {
+    props = JSON.parse(paras)
+    return JSON.stringify({success: true, data: fs.writeFileSync(props.path, props.data, props.option)})
 }

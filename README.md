@@ -28,6 +28,8 @@ npm install -g finux
 finux
 ```
 
+在手机中的浏览器打开"http://127.0.0.1:8080/"
+
 ![Pic1](https://s1.ax1x.com/2020/10/08/0wUuDA.jpg)
 
 ![Pic2](https://s1.ax1x.com/2020/10/08/0wUejH.jpg)

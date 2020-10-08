@@ -163,7 +163,7 @@ function logIPAdressAndPort() {
 back.listen(port_back)
 front.listen(port_front,
     () => {
-        console.log(`Finux listening on`)
+        console.log(`Orangex listening on`)
         console.log(`       http://127.0.0.1:${port_front}/`)
         logIPAdressAndPort()
         console.log(`Press Ctrl + C to exit.`)

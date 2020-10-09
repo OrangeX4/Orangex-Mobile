@@ -3,6 +3,7 @@ const express_front = require('express')
 const fs = require('./fs2json')
 const clipboardy = require('clipboardy')
 const path = require('path')
+const { exec } = require('child_process');
 const back = express_back()
 const front = express_front()
 const port_back = 1984
@@ -163,6 +164,16 @@ function logIPAdressAndPort() {
     }
 }
 
+exec('npm --registry https://registry.npm.taobao.org view orangex version', (err, stdout, stderr) => {
+    if(stdout !== '1.3.7\n') {
+        if(err) {
+            console.log(err)
+            return
+        }
+        console.log('\nPlease update your orangex, run command "npm update -g orangex"')
+    }
+})
+
 // Listening
 back.listen(port_back)
 front.listen(port_front,
@@ -172,3 +183,4 @@ front.listen(port_front,
         logIPAdressAndPort()
         console.log(`Press Ctrl + C to exit.`)
     })
+

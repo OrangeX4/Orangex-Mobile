@@ -1,7 +1,6 @@
 const fs = require("fs")
 const rimraf = require("rimraf")
 const path = require("path")
-const { json } = require("express")
 
 exports.readDir = (dirname) => {
 

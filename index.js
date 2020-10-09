@@ -1,6 +1,7 @@
 const express_back = require('express')
 const express_front = require('express')
 const fs = require('./fs2json')
+const clipboardy = require('clipboardy')
 const path = require('path')
 const back = express_back()
 const front = express_front()
@@ -21,6 +22,9 @@ front.use(express_front.static(path.join(__dirname, 'public')))
 // Main
 back.get('/hello', (req, res) => {
     res.send('Hello World!')
+})
+back.get('/clipboard', (req, res) => {
+    res.send(JSON.stringify({ data: clipboardy.readSync() }))
 })
 back.get('/dir', (req, res) => {
     try {

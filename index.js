@@ -199,7 +199,8 @@ back.post('/run', (req, res) => {
         try {
             res.send(fs.run(body))
         } catch (err) {
-            res.send(JSON.stringify({ success: false , err: err}))
+            console.log(err)
+            res.send(JSON.stringify({ success: false , err: err.stderr.toString()}))
         }
     });
 })
@@ -218,7 +219,7 @@ function logIPAdressAndPort() {
 }
 
 exec('npm --registry https://registry.npm.taobao.org view orangex version', (err, stdout, stderr) => {
-    if(stdout !== '1.4.4\n') {
+    if(stdout !== '1.4.6\n') {
         if(!err) {
             console.log('\nThe latest version is ' + stdout)
             console.log('Please update your orangex, run command "npm update -g orangex"')

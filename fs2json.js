@@ -75,7 +75,7 @@ exports.move = (paras) => {
     props = JSON.parse(paras)
     props.dirs.forEach((dir) => {
         fs.rename(path.join(props.oldDir, dir), path.join(props.newDir, dir), (err) => {
-            if(err) {
+            if (err) {
                 copyFolder(path.join(props.oldDir, dir), path.join(props.newDir, dir))
                 rimraf.sync(path.join(props.oldDir, dir))
             }
@@ -83,7 +83,7 @@ exports.move = (paras) => {
     })
     props.files.forEach((file) => {
         fs.rename(path.join(props.oldDir, file), path.join(props.newDir, file), (err) => {
-            if(err) {
+            if (err) {
                 fs.copyFileSync(path.join(props.oldDir, file), path.join(props.newDir, file))
                 fs.unlinkSync(path.join(props.oldDir, file))
             }
@@ -130,10 +130,60 @@ exports.copy = (paras) => {
 
 exports.read = (paras) => {
     props = JSON.parse(paras)
-    return JSON.stringify({success: true, data: (fs.readFileSync(props.path, props.option)).toString()})
+    return JSON.stringify({ success: true, data: (fs.readFileSync(props.path, props.option)).toString() })
 }
 
 exports.write = (paras) => {
     props = JSON.parse(paras)
-    return JSON.stringify({success: true, data: fs.writeFileSync(props.path, props.data, props.option)})
+    fs.writeFileSync(props.path, props.data, props.option)
+    return JSON.stringify({ success: true })
+}
+
+exports.config = (current) => {
+    retValue = {
+        success: true,
+        default: {
+            default: [],
+            defaultFile: {}
+        },
+        current: {
+            current: [],
+            currentFile: {}
+        }
+    }
+    const USER_HOME = process.env.HOME || process.env.USERPROFILE
+    const defaultDirPath = path.join(USER_HOME, '.orangex')
+    const defaultPath = path.join(USER_HOME, '.orangex/default.json')
+    const currentPath = path.join(current, '.orangex/current.json')
+
+    if (!fs.existsSync(defaultPath)) {
+        if (!fs.existsSync(defaultDirPath)) fs.mkdirSync(defaultDirPath)
+        fs.copyFileSync('./command.json', defaultPath)
+    }
+    retValue.default = JSON.parse(fs.readFileSync(defaultPath).toString())
+
+    if (fs.existsSync(currentPath)) retValue.current = JSON.parse(fs.readFileSync(currentPath).toString())
+
+    return JSON.stringify(retValue)
+}
+
+exports.saveDefaultConfig = (paras) => {
+    props = JSON.parse(paras)
+    const USER_HOME = process.env.HOME || process.env.USERPROFILE
+    const defaultDirPath = path.join(USER_HOME, '.orangex')
+    const defaultPath = path.join(USER_HOME, '.orangex/default.json')
+    if (!fs.existsSync(defaultPath)) {
+        if (!fs.existsSync(defaultDirPath)) fs.mkdirSync(defaultDirPath)
+        fs.copyFileSync('./command.json', defaultPath)
+    }
+    fs.writeFileSync(defaultPath, props.data, props.option)
+    return JSON.stringify({ success: true })
+}
+exports.saveCurrentConfig = (paras) => {
+    props = JSON.parse(paras)
+    const currentPath = path.join(props.current, '.orangex/current.json')
+    const currentDirPath = path.join(props.current, '.orangex')
+    if (!fs.existsSync(currentDirPath)) fs.mkdirSync(currentDirPath)
+    fs.writeFileSync(currentPath, props.data, props.option)
+    return JSON.stringify({ success: true })
 }

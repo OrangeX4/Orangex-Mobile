@@ -1,0 +1,30 @@
+{
+    "default": [
+        {
+            "title": "Git Commit",
+            "content": "cd &{current}\ngit commit -m\"commit\""
+        },
+        {
+            "title": "Display",
+            "content": "ls"
+        }
+    ],
+    "defaultFile": {
+        "cpp": [
+            {
+                "title": "Build & Run",
+                "content": "cd &{current}\ng++ -o &{file-without-suffix} &{file}\n./&{file-without-suffix}"
+            },
+            {
+                "title": "Run",
+                "content": "cd &{current}\n./&{file-without-suffix}"
+            }
+        ],
+        "js": [
+            {
+                "title": "Run",
+                "content": "cd &{current}\nnode &{file}"
+            }
+        ]
+    }
+}

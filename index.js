@@ -150,6 +150,45 @@ back.post('/write', (req, res) => {
         }
     });
 })
+back.get('/config', (req, res) => {
+    try {
+        if (req.query.current !== undefined) res.send(fs.config(req.query.current))
+        else res.send(JSON.stringify({
+            success: false
+        }))
+    } catch (err) {
+        res.send(JSON.stringify({
+            success: false
+        }))
+    }
+})
+
+back.post('/saveDefaultConfig', (req, res) => {
+    let body = ''
+    req.on('data', (chunk) => {
+        body += chunk
+    });
+    req.on('end', () => {
+        try {
+            res.send(fs.saveDefaultConfig(body))
+        } catch (err) {
+            res.send(JSON.stringify({ success: false }))
+        }
+    });
+})
+back.post('/saveCurrentConfig', (req, res) => {
+    let body = ''
+    req.on('data', (chunk) => {
+        body += chunk
+    });
+    req.on('end', () => {
+        try {
+            res.send(fs.saveCurrentConfig(body))
+        } catch (err) {
+            res.send(JSON.stringify({ success: false }))
+        }
+    });
+})
 
 function logIPAdressAndPort() {
     let interfaces = require('os').networkInterfaces();

@@ -15,6 +15,7 @@
   "dependencies": {
     "clipboardy": "^2.3.0",
     "express": "^4.17.1",
+    "internet-available": "^1.0.0",
     "rimraf": "^3.0.2"
   }
 }

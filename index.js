@@ -1,6 +1,7 @@
 const express_back = require('express')
 const express_front = require('express')
 const https = require('https')
+const internetAvailable = require("internet-available")
 const fs = require('./fs2json')
 const clipboardy = require('clipboardy')
 const path = require('path')
@@ -219,7 +220,11 @@ function logIPAdressAndPort() {
     }
 }
 
-try {
+internetAvailable({
+    domainName: "baidu.com",
+    host: '114.114.114.114'
+}).then(() => {
+    // console.log("internet")
     https.get("https://orangex4.cool/display.json", (res) => {
         var text = ''
         res.on('data',(data) => {
@@ -230,10 +235,8 @@ try {
             if(data.display) console.log(data.data)
         })
     })
-} catch (err) {
-    
-}
-
+}).catch(() => {
+})
 
 exec('npm --registry https://registry.npm.taobao.org view orangex version', (err, stdout, stderr) => {
     if (stdout !== '2.0.0\n') {

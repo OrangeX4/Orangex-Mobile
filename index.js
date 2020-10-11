@@ -5,11 +5,14 @@ const internetAvailable = require("internet-available")
 const fs = require('./fs2json')
 const clipboardy = require('clipboardy')
 const path = require('path')
-const { exec } = require('child_process');
+const { exec } = require('child_process')
+var argv = require('minimist')(process.argv.slice(2))
 const back = express_back()
 const front = express_front()
 const port_back = 1984
-const port_front = 8080
+let port_front = 8080
+
+if(argv.port !== undefined) port_front = argv.port.toString()
 
 back.all('*', function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*')

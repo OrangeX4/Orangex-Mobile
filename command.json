@@ -2,7 +2,7 @@
     "default": [
         {
             "title": "Display",
-            "content": "ls"
+            "content": "cd &{current}\nls"
         },
         {
             "title": "Git Commit",

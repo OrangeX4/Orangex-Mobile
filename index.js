@@ -217,7 +217,7 @@ function logIPAdressAndPort() {
 }
 
 exec('npm --registry https://registry.npm.taobao.org view orangex version', (err, stdout, stderr) => {
-    if(stdout !== '1.4.1\n') {
+    if(stdout !== '1.4.2\n') {
         if(!err) {
             console.log('\nPlease update your orangex, run command "npm update -g orangex"')
         }

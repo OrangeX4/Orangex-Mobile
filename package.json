@@ -1,6 +1,6 @@
 {
   "name": "orangex",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "A useful tool chain for mobile coding with termux.",
   "main": "index.js",
   "scripts": {

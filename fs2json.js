@@ -190,5 +190,5 @@ exports.saveCurrentConfig = (paras) => {
 }
 exports.run = (paras) => {
     props = JSON.parse(paras)
-    return JSON.stringify({ success: true , out: execSync(paras.data, paras.option)})
+    return JSON.stringify({ success: true , out: execSync(props.data, props.option).toString()})
 }

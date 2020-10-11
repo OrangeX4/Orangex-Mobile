@@ -157,6 +157,7 @@ back.get('/config', (req, res) => {
             success: false
         }))
     } catch (err) {
+        console.log(err)
         res.send(JSON.stringify({
             success: false
         }))

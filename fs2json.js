@@ -159,7 +159,7 @@ exports.config = (current) => {
 
     if (!fs.existsSync(defaultPath)) {
         if (!fs.existsSync(defaultDirPath)) fs.mkdirSync(defaultDirPath)
-        fs.copyFileSync('./command.json', defaultPath)
+        fs.copyFileSync(path.join(__dirname, 'command.json'), defaultPath)
     }
     retValue.default = JSON.parse(fs.readFileSync(defaultPath).toString())
 

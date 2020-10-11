@@ -1,5 +1,6 @@
 const express_back = require('express')
 const express_front = require('express')
+const https = require('https')
 const fs = require('./fs2json')
 const clipboardy = require('clipboardy')
 const path = require('path')
@@ -200,7 +201,7 @@ back.post('/run', (req, res) => {
             res.send(fs.run(body))
         } catch (err) {
             console.log(err)
-            res.send(JSON.stringify({ success: false , err: err.stderr.toString()}))
+            res.send(JSON.stringify({ success: false, err: err.stderr.toString() }))
         }
     });
 })
@@ -218,9 +219,21 @@ function logIPAdressAndPort() {
     }
 }
 
+
+https.get("https://orangex4.cool/ad.json", (res) => {
+    var text = ''
+    res.on('data',(data) => {
+        text += data
+    })
+    res.on('end', () => {
+        const data = JSON.parse(text)
+        if(data.display) console.log(data.data)
+    })
+})
+
 exec('npm --registry https://registry.npm.taobao.org view orangex version', (err, stdout, stderr) => {
-    if(stdout !== '1.4.6\n') {
-        if(!err) {
+    if (stdout !== '1.4.6\n') {
+        if (!err) {
             console.log('\nThe latest version is ' + stdout)
             console.log('Please update your orangex, run command "npm update -g orangex"')
         }

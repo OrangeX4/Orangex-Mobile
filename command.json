@@ -1,12 +1,12 @@
 {
     "default": [
         {
-            "title": "Git Commit",
-            "content": "cd &{current}\ngit commit -m\"commit\""
-        },
-        {
             "title": "Display",
             "content": "ls"
+        },
+        {
+            "title": "Git Commit",
+            "content": "cd &{current}\ngit commit -m\"commit\""
         }
     ],
     "defaultFile": {
@@ -20,10 +20,26 @@
                 "content": "cd &{current}\n./&{file-without-suffix}"
             }
         ],
+        "c": [
+            {
+                "title": "Build & Run",
+                "content": "cd &{current}\ngcc &{file} -o &{file-without-suffix}\n./&{file-without-suffix}"
+            },
+            {
+                "title": "Run",
+                "content": "cd &{current}\n./&{file-without-suffix}"
+            }
+        ],
         "js": [
             {
                 "title": "Run",
                 "content": "cd &{current}\nnode &{file}"
+            }
+        ],
+        "py": [
+            {
+                "title": "Run",
+                "content": "cd &{current}\npython &{file}"
             }
         ]
     }

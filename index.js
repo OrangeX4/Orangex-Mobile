@@ -189,6 +189,19 @@ back.post('/saveCurrentConfig', (req, res) => {
         }
     });
 })
+back.post('/run', (req, res) => {
+    let body = ''
+    req.on('data', (chunk) => {
+        body += chunk
+    });
+    req.on('end', () => {
+        try {
+            res.send(fs.run(body))
+        } catch (err) {
+            res.send(JSON.stringify({ success: false }))
+        }
+    });
+})
 
 function logIPAdressAndPort() {
     let interfaces = require('os').networkInterfaces();

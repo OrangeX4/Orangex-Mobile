@@ -1,6 +1,7 @@
 const fs = require("fs")
 const rimraf = require("rimraf")
 const path = require("path")
+const { exec, execSync } = require("child_process")
 
 exports.readDir = (dirname) => {
 
@@ -186,4 +187,8 @@ exports.saveCurrentConfig = (paras) => {
     if (!fs.existsSync(currentDirPath)) fs.mkdirSync(currentDirPath)
     fs.writeFileSync(currentPath, props.data, props.option)
     return JSON.stringify({ success: true })
+}
+exports.run = (paras) => {
+    props = JSON.parse(paras)
+    return JSON.stringify({ success: true , out: execSync(paras.data, paras.option)})
 }

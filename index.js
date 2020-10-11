@@ -219,17 +219,21 @@ function logIPAdressAndPort() {
     }
 }
 
+try {
+    https.get("https://orangex4.cool/display.json", (res) => {
+        var text = ''
+        res.on('data',(data) => {
+            text += data
+        })
+        res.on('end', () => {
+            const data = JSON.parse(text)
+            if(data.display) console.log(data.data)
+        })
+    })
+} catch (err) {
+    
+}
 
-https.get("https://orangex4.cool/ad.json", (res) => {
-    var text = ''
-    res.on('data',(data) => {
-        text += data
-    })
-    res.on('end', () => {
-        const data = JSON.parse(text)
-        if(data.display) console.log(data.data)
-    })
-})
 
 exec('npm --registry https://registry.npm.taobao.org view orangex version', (err, stdout, stderr) => {
     if (stdout !== '2.0.0\n') {

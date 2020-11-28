@@ -162,7 +162,7 @@ npm install -g orangex
 
 执行下列命令: 
 ```bash
-npm install -g orangex
+orangex
 ```
 
 ![](https://s1.ax1x.com/2020/10/11/0gdhTK.jpg)

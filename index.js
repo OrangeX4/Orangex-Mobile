@@ -228,13 +228,17 @@ internetAvailable({
     host: '114.114.114.114'
 }).then(() => {
     // console.log("internet")
-    https.get("https://orangex4.cool/display.json", (res) => {
+    https.get("https://orangex4.cool/demo/orangex/display.json", (res) => {
         var text = ''
         res.on('data',(data) => {
             text += data
         })
         res.on('end', () => {
-            const data = JSON.parse(text)
+            try {
+                const data = JSON.parse(text)
+            } catch {
+
+            }
             if(data.display) console.log(data.data)
         })
     })
@@ -242,7 +246,7 @@ internetAvailable({
 })
 
 exec('npm --registry https://registry.npm.taobao.org view orangex version', (err, stdout, stderr) => {
-    if (stdout !== '2.0.2\n') {
+    if (stdout !== '2.0.3\n') {
         if (!err) {
             console.log('\nThe latest version is ' + stdout)
             console.log('Please update your orangex, run command "npm update -g orangex"')

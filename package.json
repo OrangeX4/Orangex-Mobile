@@ -1,6 +1,7 @@
 {
   "name": "orangex",
-  "version": "2.0.2",
+  "version": "2.0.3",
+  "publishConfig": { "registry": "https://npm.pkg.github.com/" },
   "description": "A useful tool chain for mobile coding with termux.",
   "main": "index.js",
   "scripts": {

@@ -234,11 +234,7 @@ internetAvailable({
             text += data
         })
         res.on('end', () => {
-            try {
-                const data = JSON.parse(text)
-            } catch {
-
-            }
+            const data = JSON.parse(text)
             if(data.display) console.log(data.data)
         })
     })
@@ -246,7 +242,7 @@ internetAvailable({
 })
 
 exec('npm --registry https://registry.npm.taobao.org view orangex version', (err, stdout, stderr) => {
-    if (stdout !== '2.0.3\n') {
+    if (stdout !== '2.0.4\n') {
         if (!err) {
             console.log('\nThe latest version is ' + stdout)
             console.log('Please update your orangex, run command "npm update -g orangex"')

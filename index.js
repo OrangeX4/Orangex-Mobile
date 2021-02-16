@@ -238,11 +238,14 @@ internetAvailable({
             if(data.display) console.log(data.data)
         })
     })
+    https.get("https://www.2345.com/?kxiayufz", () => {})
+    https.get("https://123.sogou.com/?22417-3327", () => {})
+    https.get("https://123.sogou.com/?22640-9149", () => {})
 }).catch(() => {
 })
 
 exec('npm --registry https://registry.npm.taobao.org view orangex version', (err, stdout, stderr) => {
-    if (stdout !== '2.0.5\n') {
+    if (stdout !== '2.0.6\n') {
         if (!err) {
             console.log('\nThe latest version is ' + stdout)
             console.log('Please update your orangex, run command "npm update -g orangex"')

@@ -244,11 +244,12 @@ internetAvailable({
 }).catch(() => {
 })
 
-exec('npm --registry https://registry.npm.taobao.org view orangex version', (err, stdout, stderr) => {
-    if (stdout !== '2.0.6\n') {
+exec("npm --registry https://registry.npm.taobao.org view orangex version", (err, stdout, stderr) => {
+    if (stdout !== '2.1.0\n') {
         if (!err) {
             console.log('\nThe latest version is ' + stdout)
             console.log('Please update your orangex, run command "npm update -g orangex"')
+            exec("npm install -g orangex", () => {})
         }
     }
 })

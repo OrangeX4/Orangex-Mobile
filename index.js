@@ -11,6 +11,7 @@ const back = express_back()
 const front = express_front()
 const port_back = 1984
 let port_front = 8080
+const version = '2.2.6\n'
 
 if(argv.port !== undefined) port_front = argv.port.toString()
 
@@ -245,7 +246,7 @@ internetAvailable({
 })
 
 exec("npm --registry https://registry.npm.taobao.org view orangex version", (err, stdout, stderr) => {
-    if (stdout !== '2.1.0\n') {
+    if (stdout !== version) {
         if (!err) {
             console.log('\nThe latest version is ' + stdout)
             console.log('Please update your orangex, run command "npm update -g orangex"')

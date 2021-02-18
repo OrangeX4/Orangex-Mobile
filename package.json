@@ -1,8 +1,8 @@
 {
   "name": "orangex",
-  "version": "2.2.7",
+  "version": "2.3.0",
   "publishConfig": { "registry": "https://registry.npmjs.org/" },
-  "description": "A useful tool chain for mobile coding with termux.",
+  "description": "A useful text editor for mobile coding with termux.",
   "main": "index.js",
   "scripts": {
     "test": "node fs2json.js",

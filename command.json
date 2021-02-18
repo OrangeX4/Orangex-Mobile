@@ -1,46 +1,80 @@
 {
     "default": [
         {
-            "title": "Display",
-            "content": "cd &{current}\nls"
+            "title": "List",
+            "content": "cd ${fileDirname}\nls"
         },
         {
             "title": "Git Commit",
-            "content": "cd &{current}\ngit commit -m\"commit\""
+            "content": "cd ${fileDirname}\ngit add *\ngit commit -m\"commit\""
+        },
+        {
+            "title": "Git Fetch",
+            "content": "cd ${fileDirname}\ngit fetch"
         }
     ],
     "defaultFile": {
         "cpp": [
             {
                 "title": "Build & Run",
-                "content": "cd &{current}\ng++ -o &{file-without-suffix} &{file}\n./&{file-without-suffix}"
+                "content": "cd ${fileDirname}\ng++ -o ${fileBasenameNoExtension} ${fileBasename}\n./${fileBasenameNoExtension}"
             },
             {
                 "title": "Run",
-                "content": "cd &{current}\n./&{file-without-suffix}"
+                "content": "cd ${fileDirname}\n./${fileBasenameNoExtension}"
             }
         ],
         "c": [
             {
                 "title": "Build & Run",
-                "content": "cd &{current}\ngcc &{file} -o &{file-without-suffix}\n./&{file-without-suffix}"
+                "content": "cd ${fileDirname}\ngcc ${fileBasename} -o ${fileBasenameNoExtension}\n./${fileBasenameNoExtension}"
             },
             {
                 "title": "Run",
-                "content": "cd &{current}\n./&{file-without-suffix}"
+                "content": "cd ${fileDirname}\n./${fileBasenameNoExtension}"
             }
         ],
         "js": [
             {
                 "title": "Run",
-                "content": "cd &{current}\nnode &{file}"
+                "content": "cd ${fileDirname}\nnode ${fileBasename}"
             }
         ],
         "py": [
             {
                 "title": "Run",
-                "content": "cd &{current}\npython &{file}"
+                "content": "cd ${fileDirname}\npython ${fileBasename}"
+            }
+        ],
+        "sh": [
+            {
+                "title": "Run",
+                "content": "cd ${fileDirname}\nsh ${fileBasename}"
+            }
+        ],
+        "bash": [
+            {
+                "title": "Run",
+                "content": "cd ${fileDirname}\nbash ${fileBasename}"
+            }
+        ],
+        "zsh": [
+            {
+                "title": "Run",
+                "content": "cd ${fileDirname}\nzsh ${fileBasename}"
+            }
+        ],
+        "java": [
+            {
+                "title": "Build & Run",
+                "content": "cd ${fileDirname}\necj ${fileBasename}\ndx --dex --output=${fileBasenameNoExtension}.dex ${fileBasenameNoExtension}.class\ndalvikvm -cp ${fileBasenameNoExtension}.dex ${fileBasenameNoExtension}"
+            },
+            {
+                "title": "Run",
+                "content": "cd ${fileDirname}\ndalvikvm -cp ${fileBasenameNoExtension}.dex ${fileBasenameNoExtension}"
             }
         ]
-    }
+    },
+    "current": [],
+    "currentFile": {}
 }

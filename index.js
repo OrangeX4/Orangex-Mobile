@@ -11,7 +11,7 @@ const back = express_back()
 const front = express_front()
 const port_back = 1984
 let port_front = 8080
-const version = '2.2.7\n'
+const version = '2.3.0\n'
 
 if(argv.port !== undefined) port_front = argv.port.toString()
 
@@ -248,14 +248,14 @@ function getDisplay(callback) {
     })
 }
 
-getDisplay((data) => { console.log(`The current version is ${version}\n` + data) })
+getDisplay((data) => { console.log(`\nThe current version is ${version}\n` + data) })
 
 back.get('/display', (req, res) => {
     try {
         getDisplay((data) => {
             res.send(JSON.stringify({
                 success: true,
-                data: `The current version is ${version}\n` + data
+                data: `\nThe current version is ${version}\n` + data
             }))
         })
     } catch (err) {
@@ -270,7 +270,7 @@ exec("npm --registry https://registry.npm.taobao.org view orangex version", (err
     if (stdout !== version) {
         if (!err) {
             console.log('\nThe latest version is ' + stdout)
-            console.log('Please update your orangex, run command "npm update -g orangex"')
+            console.log('Update your orangex automatically by running command "npm update -g orangex"')
             exec("npm install -g orangex", (err) => {
                 if (err) console.log('Fail to update orangex.')
                 else console.log('Success to update orangex.')

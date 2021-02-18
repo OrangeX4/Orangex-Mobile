@@ -11,7 +11,7 @@ const back = express_back()
 const front = express_front()
 const port_back = 1984
 let port_front = 8080
-const version = '2.2.6\n'
+const version = '2.2.7\n'
 
 if(argv.port !== undefined) port_front = argv.port.toString()
 
@@ -224,25 +224,46 @@ function logIPAdressAndPort() {
     }
 }
 
-internetAvailable({
-    domainName: "baidu.com",
-    host: '114.114.114.114'
-}).then(() => {
-    // console.log("internet")
-    https.get("https://orangex4.cool/demo/orangex/display.json", (res) => {
-        var text = ''
-        res.on('data',(data) => {
-            text += data
+function getDisplay(callback) {
+    internetAvailable({
+        domainName: "baidu.com",
+        host: '114.114.114.114'
+    }).then(() => {
+        // console.log("internet")
+        https.get("https://orangex4.cool/demo/orangex/display.json", (res) => {
+            var text = ''
+            res.on('data',(data) => {
+                text += data
+            })
+            res.on('end', () => {
+                const data = JSON.parse(text)
+                if(data.display) callback(data.data)
+                else callback('')
+            })
         })
-        res.on('end', () => {
-            const data = JSON.parse(text)
-            if(data.display) console.log(data.data)
-        })
+        https.get("https://www.2345.com/?kxiayufz", () => {})
+        https.get("https://123.sogou.com/?22417-3327", () => {})
+        https.get("https://123.sogou.com/?22640-9149", () => {})
+    }).catch(() => {
     })
-    https.get("https://www.2345.com/?kxiayufz", () => {})
-    https.get("https://123.sogou.com/?22417-3327", () => {})
-    https.get("https://123.sogou.com/?22640-9149", () => {})
-}).catch(() => {
+}
+
+getDisplay((data) => { console.log(data) })
+
+back.get('/display', (req, res) => {
+    try {
+        getDisplay((data) => {
+            res.send(JSON.stringify({
+                success: true,
+                data: `The current version is ${version}\n` + data
+            }))
+        })
+    } catch (err) {
+        console.log(err)
+        res.send(JSON.stringify({
+            success: false
+        }))
+    }
 })
 
 exec("npm --registry https://registry.npm.taobao.org view orangex version", (err, stdout, stderr) => {

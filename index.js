@@ -248,7 +248,7 @@ function getDisplay(callback) {
     })
 }
 
-getDisplay((data) => { console.log(data) })
+getDisplay((data) => { console.log(`The current version is ${version}\n` + data) })
 
 back.get('/display', (req, res) => {
     try {
@@ -266,12 +266,15 @@ back.get('/display', (req, res) => {
     }
 })
 
-exec("npm --registry https://registry.npm.taobao.org view orangex version", (err, stdout, stderr) => {
+exec("npm --registry https://registry.npm.taobao.org view orangex version", (err, stdout) => {
     if (stdout !== version) {
         if (!err) {
             console.log('\nThe latest version is ' + stdout)
             console.log('Please update your orangex, run command "npm update -g orangex"')
-            exec("npm install -g orangex", () => {})
+            exec("npm install -g orangex", (err) => {
+                if (err) console.log('Fail to update orangex.')
+                else console.log('Success to update orangex.')
+            })
         }
     }
 })

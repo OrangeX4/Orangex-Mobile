@@ -78,7 +78,3 @@ sh -c "$(curl -fsSL https://blog.orangex4.cool/demo/orangex/install.sh)"
 
 **恭喜你, 可以开始使用 Orangex 编程了!**
 
-<<<<<<< HEAD
-=======
-[国光Termux配置教程](https://www.sqlsec.com/2018/05/termux.html)
->>>>>>> fbe21d21d6e2a8340036fb4a7f94b3fb9d509c65

@@ -11,7 +11,7 @@ const back = express_back()
 const front = express_front()
 const port_back = 1984
 let port_front = 8080
-const version = '2.3.0\n'
+const version = '2.3.1\n'
 
 if(argv.port !== undefined) port_front = argv.port.toString()
 

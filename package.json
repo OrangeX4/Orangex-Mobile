@@ -1,6 +1,6 @@
 {
   "name": "orangex",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "publishConfig": { "registry": "https://registry.npmjs.org/" },
   "description": "A useful text editor for mobile coding with termux.",
   "main": "index.js",

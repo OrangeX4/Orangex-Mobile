@@ -78,3 +78,6 @@ sh -c "$(curl -fsSL https://blog.orangex4.cool/demo/orangex/install.sh)"
 
 **恭喜你, 可以开始使用 Orangex 编程了!**
 
+## License
+
+This project is licensed under the MIT License.
